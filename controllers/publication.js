@@ -79,4 +79,19 @@ router.get('/share/:id', isUser(), async (req, res) => {
     
 });
 
+/*
+router.get('/vote/:id/:type', isUser(), async (req, res) => {
+    const id = req.params.id;
+    const value = req.params.type == 'upvote' ? 1 : -1;
+    try {
+        await vote(id, req.session.user._id, value);
+        res.redirect('/catalog/' + id);
+    } catch(err) {
+        console.error(err);
+        const errors = mapErrors(err);
+        res.render('details', { title: 'Post Details', errors });
+    }
+});
+*/
+
 module.exports = router;

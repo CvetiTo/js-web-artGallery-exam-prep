@@ -39,7 +39,7 @@ async function deleteById(id) {
     await Publication.findByIdAndDelete(id);
 }
 
-async function sharePublication(publicationId, userId) {
+async function sharePublication(publicationId, userId, value) {
     const publication = await Publication.findById(publicationId);
 
     if(publication.usersShared.includes(userId)) {
@@ -47,8 +47,22 @@ async function sharePublication(publicationId, userId) {
     }
 
     publication.usersShared.push(userId);
+    publication.rating += value;
     await publication.save();
 }
+
+/*async function vote(postId, userId, value) {
+    const post = await Post.findById(postId);
+
+    if(post.votes.includes(userId)) {
+        throw new Error('User has already voted');
+    }
+
+    post.votes.push(userId);
+    post.rating += value;
+
+    await post.save();
+} */
 
 module.exports = {
     getAllPublication,
